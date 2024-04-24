@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>User Information</h1>
+        <div class="user-info">
+            <div class="profile">
+                <img src="" alt="Profile Picture" class="profile-img">
+                <h2 class="name"></h2>
+            </div>
+            <div class="details">
+                <p><strong>Institute:</strong> <span class="institute"></span></p>
+                <p><strong>Score:</strong> <span class="score"></span></p>
+                <p><strong>Institute Rank:</strong> <span class="institute-rank"></span></p>
+                <p><strong>Total Problems Solved:</strong> <span class="total-problems"></span></p>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

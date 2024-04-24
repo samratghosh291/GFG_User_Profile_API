@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylenext.css') }}">
+    <title>User Details</title>
+</head>
+<body>
+    <h1>User Details</h1>
+    <div>
+        <img src="{{ user_data.profile_image_url }}" alt="Profile Image" style="max-width: 200px;">
+        <h2>{{ user_data.name }}</h2>
+        <p><strong>Institute:</strong> {{ user_data.institute_name }}</p>
+        <p><strong>Score:</strong> {{ user_data.score }}</p>
+        <p><strong>Monthly Score:</strong> {{ user_data.monthly_score }}</p>
+        <p><strong>Total Problems Solved:</strong> {{ user_data.total_problems_solved }}</p>
+        <p><strong>Institute Rank:</strong> {{ user_data.institute_rank }}</p>
+        <p><strong>Pod Solved Longest Streak:</strong> {{ user_data.pod_solved_longest_streak }}</p>
+        <p><strong>Pod Solved Global Longest Streak:</strong> {{ user_data.pod_solved_global_longest_streak }}</p>
+    </div>
+</body>
+</html>
