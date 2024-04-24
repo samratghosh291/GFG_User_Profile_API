@@ -1,23 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylenext.css') }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Details</title>
-</head>
-<body>
-    <h1>User Details</h1>
-    <div>
-        <img src="{{ user_data.profile_image_url }}" alt="Profile Image" style="max-width: 200px;">
-        <h2>{{ user_data.name }}</h2>
-        <p><strong>Institute:</strong> {{ user_data.institute_name }}</p>
-        <p><strong>Score:</strong> {{ user_data.score }}</p>
-        <p><strong>Monthly Score:</strong> {{ user_data.monthly_score }}</p>
-        <p><strong>Total Problems Solved:</strong> {{ user_data.total_problems_solved }}</p>
-        <p><strong>Institute Rank:</strong> {{ user_data.institute_rank }}</p>
-        <p><strong>Pod Solved Longest Streak:</strong> {{ user_data.pod_solved_longest_streak }}</p>
-        <p><strong>Pod Solved Global Longest Streak:</strong> {{ user_data.pod_solved_global_longest_streak }}</p>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="card">
+      <nav>
+        <img id="gfg-img" src="../static/gfg.png" alt="">
+      </nav>
+      <div class="card-content">
+        <div class="card-profile">
+          <img
+            src="{{ user_data.profile_image_url }}"
+            class="profile-img"
+            alt="Profile Image"
+          />
+          <div
+            class="circular-progress"
+            data-inner-circle-color="#FFFFFF"
+            data-percentage="{{ user_data.pod_solved_longest_streak }}/{{ user_data.pod_solved_global_longest_streak }}"
+            data-progress-color="#2F8D46"
+            data-bg-color="#D1FAB9"
+          >
+            <div class="inner-circle"></div>
+            <p class="percentage">0%</p>
+          </div>
+        </div>
+        <div class="card-info">
+          <div class="card-header">
+            <h1 class="card-title">{{ user_data.name }}</h1>
+          </div>
+          <div class="card-body">
+            <ul class="info-list">
+              <li>
+                <strong>Institute:</strong> {{ user_data.institute_name }}
+              </li>
+              <li><strong>Score:</strong> {{ user_data.score }}</li>
+              <li>
+                <strong>Monthly Score:</strong> {{ user_data.monthly_score }}
+              </li>
+              <li>
+                <strong>Total Problems Solved:</strong> {{
+                user_data.total_problems_solved }}
+              </li>
+              <li>
+                <strong>Institute Rank:</strong> {{ user_data.institute_rank }}
+              </li>
+              <li>
+                <strong>Pod Solved Longest Streak:</strong> {{
+                user_data.pod_solved_longest_streak }}
+              </li>
+              <li>
+                <strong>Pod Solved Global Streak:</strong> {{
+                user_data.pod_solved_global_longest_streak }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+
+    <script>
+      const circularProgress = document.querySelectorAll(".circular-progress");
+
+      Array.from(circularProgress).forEach((progressBar) => {
+        const progressValue = progressBar.querySelector(".percentage");
+        const innerCircle = progressBar.querySelector(".inner-circle");
+        let startValue = 0,
+          endValue = Number(
+            progressBar.getAttribute("data-percentage").split("/")[0]
+          ),
+          totalValue = Number(
+            progressBar.getAttribute("data-percentage").split("/")[1]
+          ),
+          speed = 5,
+          progressColor = progressBar.getAttribute("data-progress-color");
+
+        const progress = setInterval(() => {
+          startValue++;
+          const percentage = Math.round((startValue / totalValue) * 100); // Calculate percentage
+          progressValue.textContent = `${startValue}/${totalValue}`; // Update percentage value
+          progressValue.style.color = `${progressColor}`;
+
+          innerCircle.style.backgroundColor = `${progressBar.getAttribute(
+            "data-inner-circle-color"
+          )}`;
+
+          progressBar.style.background = `conic-gradient(${progressColor} ${
+            (startValue / totalValue) * 360
+          }deg,${progressBar.getAttribute("data-bg-color")} 0deg)`;
+          if (startValue === endValue) {
+            clearInterval(progress);
+          }
+        }, speed);
+      });
+    </script>
+  </body>
 </html>

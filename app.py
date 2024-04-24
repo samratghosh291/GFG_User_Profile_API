@@ -20,15 +20,8 @@ def user_info(username):
             json_data = script_tag.string.strip()
             user_data = json.loads(json_data)['props']['pageProps']['userInfo']
             print(user_data)
-            # return render_template('_hj.html', user_data=user_data)
-
-            # get return the profile picture from profile_image_url
             profile_image_url = user_data['profile_image_url']
 
-            # get the user name from user_name
-            # user_name = user_data['user_name']
-            # return {"profile_image_url":profile_image_url,}
-            # return render_template('_hj.html', user_data=user_data)
             return render_template('index.html', user_data=user_data)
 
     return 'User not found or error occurred', 404
@@ -41,3 +34,4 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
